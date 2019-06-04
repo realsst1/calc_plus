@@ -25,6 +25,53 @@ class _HomePageState extends State<HomePage> {
 
 
   String output="0";
+  String _output="0";
+  double num1=0.0;
+  double num2=0.0;
+  String operand="";
+
+  buttonPressed(String text){
+    if(text=="CLEAR"){
+       _output="0";
+       num1=0.0;
+       num2=0.0;
+       operand="";
+    }
+    else if(text=="+" || text=="-" || text=="X" || text=="/"){
+      operand=text;
+      num1=double.parse(output);
+      _output="0";
+    }
+    else if(text=="."){
+      if(_output.contains(".")){
+        print("Already contains a decimal dot");
+        return;
+      }
+      else
+        _output=_output+text;
+    }
+    else if(text=="="){
+      num2=double.parse(output);
+      if(operand=="+")
+        _output=(num1+num2).toString();
+      else if(operand=="-")
+        _output==(num1-num2).toString();
+      else if(operand=="X")
+        _output=(num1*num2).toString();
+      else if(operand=="/")
+        _output=(num1/num2).toString();
+
+      num1=num2=0.0;
+      operand="";
+    }
+    else
+      _output=_output+text;
+
+    print(_output);
+    setState(() {
+      output=double.parse(_output).toStringAsFixed(2);
+    });
+  }
 
   Widget buildButton(String text){
     return new Expanded(
@@ -36,7 +83,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         padding: EdgeInsets.all(24.0),
-        onPressed: ()=>{},
+        onPressed: ()=>buttonPressed(text),
       )
     );
   }
