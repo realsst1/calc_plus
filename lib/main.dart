@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       if(operand=="+")
         _output=(num1+num2).toString();
       else if(operand=="-")
-        _output==(num1-num2).toString();
+        _output=(num1-num2).toString();
       else if(operand=="X")
         _output=(num1*num2).toString();
       else if(operand=="/")
